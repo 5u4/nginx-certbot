@@ -31,6 +31,7 @@ docker run -it --rm -v $(pwd)/dhparam:/data frapsoft/openssl dhparam -out /data/
 3. Create temporary nginx server
 
 ```bash
+mkdir $(pwd)/sites
 cp -f $(pwd)/templates/temporary.conf $(pwd)/temp/default.conf
 cp $(pwd)/templates/index.html $(pwd)/sites/index.html
 ```
@@ -71,6 +72,8 @@ docker rm temp-nginx -f
 6. Create the ssl nginx server
 
 ```bash
+mkdir $(pwd)/nginx
+mkdir $(pwd)/sites
 cp -r $(pwd)/templates/conf.d $(pwd)/nginx
 cp $(pwd)/templates/nginx.conf $(pwd)/nginx/nginx.conf
 cp $(pwd)/templates/index.html $(pwd)/sites/index.html
@@ -102,6 +105,28 @@ crontab -e
 ```
 
 NOTE: Replace `/home/senhung/Workspace/nginx-certbot` to your folder location
+
+## Directories
+
+You can alias the following directories
+
+### Nginx
+
+<!-- prettier-ignore -->
+```
+nginx
+├─ nginx.conf
+└─ conf.d
+    └─ default.conf
+```
+
+### Sites
+
+<!-- prettier-ignore -->
+```
+sites
+└─ index.html
+```
 
 ## Reference
 
