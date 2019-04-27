@@ -32,7 +32,7 @@ docker run -it --rm -v $(pwd)/dhparam:/data frapsoft/openssl dhparam -out /data/
 
 ```bash
 cp -f $(pwd)/templates/temporary.conf $(pwd)/temp/default.conf
-cp -f $(pwd)/templates/index.html $(pwd)/sites/index.html
+cp $(pwd)/templates/index.html $(pwd)/sites/index.html
 ```
 
 Change the server name `0x3fc.com` to the desired domain in `./temp/default.conf`
@@ -79,7 +79,7 @@ cp $(pwd)/templates/index.html $(pwd)/sites/index.html
 Change the server name `0x3fc.com` to the desired domains in `./nginx/default.conf`
 
 ```bash
-docker run -it --name nginx -p 80:80 -p 443:443 \
+docker run -it --name nginx -p 80:80 -p 443:443 --restart=always \
     -v $(pwd)/nginx/conf.d:/etc/nginx/conf.d \
     -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf \
     -v $(pwd)/dhparam/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem \
@@ -90,6 +90,18 @@ docker run -it --name nginx -p 80:80 -p 443:443 \
 ```
 
 NOTE: Replace `0x3fc.com` to your own domains.
+
+7. Set up cron job for auto renew certificates
+
+```bash
+crontab -e
+```
+
+```
+0 6 * * * cd /home/senhung/Workspace/nginx-certbot && ./scripts/renew.sh
+```
+
+NOTE: Replace `/home/senhung/Workspace/nginx-certbot` to your folder location
 
 ## Reference
 
