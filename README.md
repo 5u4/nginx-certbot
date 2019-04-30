@@ -87,8 +87,7 @@ docker run -it --name nginx -p 80:80 -p 443:443 --restart=always \
     -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf \
     -v $(pwd)/dhparam/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem \
     -v $(pwd)/sites:/usr/share/nginx/html \
-    -v $(pwd)/certbot/etc/letsencrypt/live/0x3fc.com/fullchain.pem:/etc/letsencrypt/live/0x3fc.com/fullchain.pem \
-    -v $(pwd)/certbot/etc/letsencrypt/live/0x3fc.com/privkey.pem:/etc/letsencrypt/live/0x3fc.com/privkey.pem \
+    -v $(pwd)/certbot/etc/letsencrypt/live:/etc/letsencrypt/live \
     -d nginx:alpine
 ```
 
@@ -105,6 +104,14 @@ crontab -e
 ```
 
 NOTE: Replace `/home/senhung/Workspace/nginx-certbot` to your folder location
+
+## Scripts
+
+### Create a certificate
+
+```bash
+./scripts/cert.sh <domain> <email>  # Execute step 3, 4, 5
+```
 
 ## Directories
 
