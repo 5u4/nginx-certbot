@@ -87,7 +87,7 @@ docker run -it --name nginx -p 80:80 -p 443:443 --restart=always \
     -v $(pwd)/nginx/nginx.conf:/etc/nginx/nginx.conf \
     -v $(pwd)/dhparam/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem \
     -v $(pwd)/sites:/usr/share/nginx/html \
-    -v $(pwd)/certbot/etc/letsencrypt/live:/etc/letsencrypt/live \
+    -v $(pwd)/certbot/etc/letsencrypt:/etc/letsencrypt \
     -d nginx:alpine
 ```
 
