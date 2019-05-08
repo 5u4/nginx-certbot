@@ -110,7 +110,8 @@ NOTE: Replace `/home/senhung/Workspace/nginx-certbot` to your folder location
 ### Create a certificate
 
 ```bash
-./scripts/cert.sh <domain> <email>  # Execute step 3, 4, 5
+# Execute step 3, 4, 5
+./scripts/cert.sh <domain> <email> <current-nginx-container-name>
 ```
 
 ## Directories

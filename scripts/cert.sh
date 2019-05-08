@@ -1,5 +1,6 @@
 domain=$1
-email=${2:-"alexwongsenhung@gmail.com"}
+email=$2
+nginx=${3:-"nginx"}
 
 if [ -z $domain ]
 then
@@ -21,6 +22,8 @@ fi
 
 sed -i -E "s/0x3fc.com;$/$domain;/" $(pwd)/temp/default.conf
 
+docker stop $nginx
+
 docker run -it --name temp-nginx -p 80:80 -p 443:443 \
     -v $(pwd)/temp/default.conf:/etc/nginx/conf.d/default.conf \
     -v $(pwd)/dhparam/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem \
@@ -39,3 +42,5 @@ docker run -it --rm \
     -d $domain
 
 docker rm temp-nginx -f
+
+docker start $nginx
