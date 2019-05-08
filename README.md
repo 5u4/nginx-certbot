@@ -25,7 +25,7 @@ touch $(pwd)/dhparam/dhparam-2048.pem
 ```bash
 docker run -it --rm -v $(pwd)/dhparam:/data frapsoft/openssl dhparam -out /data/dhparam-2048.pem 2048
 # Or if openssl is installed:
-# openssl dhparam -out /data/dhparam-2048.pem 2048
+# openssl dhparam -out $(pwd)/dhparam/dhparam-2048.pem 2048
 ```
 
 3. Create temporary nginx server
