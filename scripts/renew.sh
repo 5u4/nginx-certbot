@@ -1,5 +1,7 @@
+nginx=${1:-"nginx"}
+
 # Stop main nginx
-docker stop nginx
+docker stop $nginx
 
 # Start a temp nginx server that accepts the challenge on port 80
 docker run -it --name temp-nginx -p 80:80 -p 443:443 \
@@ -24,4 +26,4 @@ docker kill --signal=HUP temp-nginx
 docker rm temp-nginx -f
 
 # Restart nginx
-docker start nginx
+docker start $nginx

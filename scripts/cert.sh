@@ -14,13 +14,14 @@ mkdir $(pwd)/sites
 fi
 
 cp -f $(pwd)/templates/temporary.conf $(pwd)/temp/default.conf
+sed -i -E "s/0x3fc.com;$/$domain;/g" $(pwd)/temp/default.conf
 
 if [ -z $(pwd)/sites/index.html ]
 then
 cp $(pwd)/templates/index.html $(pwd)/sites/index.html
 fi
 
-sed -i -E "s/0x3fc.com;$/$domain;/" $(pwd)/temp/default.conf
+sed -i -E "s/0x3fc.com/$domain/g" $(pwd)/sites/index.html
 
 docker stop $nginx
 
