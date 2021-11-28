@@ -5,6 +5,8 @@
 
 ## Before All
 
+**⚠️ Important: Scripts should be ran on repo root path**
+
 Generate `dbparam`
 
 ```bash
@@ -18,8 +20,6 @@ docker run -it --rm -v $(pwd)/dhparam:/data frapsoft/openssl dhparam -out /data/
 ```
 
 ## Scripts
-
-**⚠️ Important: Scripts should be ran on repo root path**
 
 ### Create a certificate
 
