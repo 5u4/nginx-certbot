@@ -2,26 +2,29 @@ domain=$1
 email=$2
 nginx=${3:-"nginx"}
 
+# Ensure domain is specificed
 if [ -z $domain ]
 then
 echo Domain is not specified
 exit 1
 fi
 
+# Make sites folder
 if [ -z $(pwd)/sites/index.html ]
 then
 mkdir $(pwd)/sites
 fi
-
-cp -f $(pwd)/templates/temporary.conf $(pwd)/temp/default.conf
 
 if [ -z $(pwd)/sites/index.html ]
 then
 cp $(pwd)/templates/index.html $(pwd)/sites/index.html
 fi
 
-sed -i -E "s/0x3fc.com;$/$domain;/" $(pwd)/temp/default.conf
+# Cp tmp settings
+cp -f $(pwd)/templates/temporary.conf $(pwd)/temp/default.conf
+sed -i -E "s/0x3fc.com;$/$domain;/g" $(pwd)/temp/default.conf
 
+# Stop the current running nginx
 docker stop $nginx
 
 docker run -it --name temp-nginx -p 80:80 -p 443:443 \
